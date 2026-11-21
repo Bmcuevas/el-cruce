@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 2,
+"version": 3,
 "patches": [
 {
 "v": 2,
@@ -1428,6 +1428,27 @@
 "dur": "1 h 10"
 }
 ]
+}
+}
+]
+},
+{
+"v": 3,
+"ops": [
+{
+"col": "items",
+"id": "guitarra",
+"data": {
+"bag": "campamento",
+"name": "Guitarra",
+"note": "Para el campamento. Ver si entra en el bolso de corredor (120 L) o cómo se lleva",
+"shared": true,
+"owner": "bruno",
+"order": 82,
+"s": {
+"bruno": "falta",
+"marco": "falta"
+}
 }
 }
 ]
