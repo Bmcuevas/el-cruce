@@ -1166,5 +1166,271 @@
 "title": "¿Bariloche o salida a Mendoza?",
 "id": "d12"
 }
+],
+"version": 2,
+"patches": [
+{
+"v": 2,
+"ops": [
+{
+"col": "items",
+"id": "campera-impermeable",
+"data": {
+"note": "Te la dan en el kit, con costuras termoselladas. Es la que controlan: no hay que comprarla"
+}
+},
+{
+"col": "items",
+"id": "silbato",
+"data": {
+"s": {
+"bruno": "tengo"
+},
+"note": "Bruno: el de la boya de natación en aguas abiertas"
+}
+},
+{
+"col": "items",
+"id": "bastones",
+"data": {
+"note": "Bruno: 2 x Forclaz Hike 500 + puntas de goma. A la vuelta vuelven con Marco"
+}
+},
+{
+"col": "items",
+"id": "colchon-inflable",
+"data": {
+"s": {
+"bruno": "tengo",
+"marco": "tengo"
+},
+"note": "Usamos los de Campana"
+}
+},
+{
+"col": "items",
+"id": "almohada-inflable",
+"data": {
+"s": {
+"bruno": "tengo"
+}
+}
+},
+{
+"col": "items",
+"id": "antifaz-y-tapones",
+"data": {
+"s": {
+"bruno": "tengo"
+}
+}
+},
+{
+"col": "items",
+"id": "medias-gruesas",
+"data": {
+"s": {
+"bruno": "tengo"
+}
+}
+},
+{
+"col": "items",
+"id": "gorro-de-lana-y-guantes",
+"data": {
+"s": {
+"bruno": "tengo"
+}
+}
+},
+{
+"col": "items",
+"id": "sandalias-u-ojotas",
+"data": {
+"s": {
+"bruno": "tengo"
+}
+}
+},
+{
+"col": "items",
+"id": "malla-y-toalla-de-microfibra",
+"data": {
+"s": {
+"bruno": "tengo"
+}
+}
+},
+{
+"col": "items",
+"id": "campera-de-pluma-o-sintetica",
+"data": {
+"note": "Recomendada: Forclaz MT100 de pluma (−5 °C, con capucha, muy compresible)"
+}
+},
+{
+"col": "items",
+"id": "pantalon-de-abrigo",
+"data": {
+"note": "Recomendada: calza polar MH100 de Decathlon (liviana y compacta)"
+}
+},
+{
+"col": "items",
+"id": "lentes-de-contacto",
+"data": {
+"bag": "campamento",
+"name": "Lentes de contacto + líquido y estuche",
+"note": "",
+"shared": false,
+"owner": "",
+"only": "bruno",
+"order": 81,
+"s": {
+"bruno": "falta",
+"marco": "falta"
+}
+}
+},
+{
+"col": "todos",
+"id": "t07",
+"data": {
+"done": true
+}
+},
+{
+"col": "todos",
+"id": "t09",
+"data": {
+"text": "Revisar el seguro del auto",
+"who": "bruno",
+"done": false,
+"order": 9
+}
+},
+{
+"col": "todos",
+"id": "t10",
+"data": {
+"text": "Alojamiento en Mendoza",
+"who": "both",
+"done": false,
+"order": 10
+}
+},
+{
+"col": "days",
+"id": "d08",
+"data": {
+"night": "Hotel Presidente Perón",
+"kind": "ok"
+}
+},
+{
+"col": "days",
+"id": "d11",
+"data": {
+"night": "Hotel Presidente Perón",
+"kind": "ok"
+}
+},
+{
+"col": "info",
+"id": "stay-bariloche",
+"data": {
+"type": "stay",
+"order": 1,
+"name": "Hotel Presidente Perón",
+"alias": "Hotel de los petroleros",
+"address": "Av. Ezequiel Bustillo 7072, km 7 (ruta al Llao Llao), San Carlos de Bariloche",
+"phone": "02944-461034",
+"nights": [
+"Mar 8 dic",
+"Vie 11 dic"
+],
+"price": "ARS 280.000 en total (≈ 162 €)",
+"maps": "https://www.google.com/maps/search/?api=1&query=Hotel+Presidente+Peron+Av.+Ezequiel+Bustillo+7072+Bariloche"
+}
+},
+{
+"col": "info",
+"id": "flight-bruno-ida",
+"data": {
+"type": "flight",
+"who": "bruno",
+"order": 1,
+"title": "Ida",
+"date": "Sáb 5 dic 2026",
+"bag": "Valija despachada: 1 pieza",
+"hand": "Equipaje de mano",
+"segments": [
+{
+"code": "AZ 2071",
+"airline": "ITA Airways",
+"from": "LIN",
+"fromName": "Milán Linate",
+"dep": "15:00",
+"to": "FCO",
+"toName": "Roma Fiumicino · T1",
+"arr": "16:10",
+"dur": "1 h 10"
+},
+{
+"code": "AR 1141",
+"airline": "Aerolíneas Argentinas",
+"from": "FCO",
+"fromName": "Roma Fiumicino · T3",
+"dep": "18:15",
+"to": "EZE",
+"toName": "Ezeiza",
+"arr": "04:40",
+"plus": "+1",
+"dur": "14 h 25"
+}
+]
+}
+},
+{
+"col": "info",
+"id": "flight-bruno-vuelta",
+"data": {
+"type": "flight",
+"who": "bruno",
+"order": 2,
+"title": "Vuelta",
+"date": "Lun 25 ene 2027",
+"bag": "Sin valija despachada (tarifa Light)",
+"hand": "Equipaje de mano",
+"warn": "Los bastones no entran en cabina: vuelven con Marco",
+"segments": [
+{
+"code": "AZ 681",
+"airline": "ITA Airways",
+"from": "EZE",
+"fromName": "Ezeiza · T P",
+"dep": "13:55",
+"to": "FCO",
+"toName": "Roma Fiumicino · T3",
+"arr": "06:35",
+"plus": "+1",
+"dur": "12 h 40"
+},
+{
+"code": "AZ 2028",
+"airline": "ITA Airways",
+"from": "FCO",
+"fromName": "Roma Fiumicino · T1",
+"dep": "09:00",
+"to": "LIN",
+"toName": "Milán Linate",
+"arr": "10:10",
+"dur": "1 h 10"
+}
+]
+}
+}
+]
+}
 ]
 }

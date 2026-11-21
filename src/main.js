@@ -19,7 +19,7 @@ const ETAPA = [
 const STAGE_DAY = { 1: 'miércoles 9 dic', 2: 'jueves 10 dic', 3: 'viernes 11 dic' };
 const VIEWS = ['inicio', 'equipaje', 'etapa', 'viaje'];
 
-const state = { who: 'bruno', bag: 'obligatorio', onlyMissing: false, items: [], todos: [], days: [], etapa: {}, loaded: { items: false, todos: false, days: false } };
+const state = { who: 'bruno', bag: 'obligatorio', onlyMissing: false, items: [], todos: [], days: [], info: [], etapa: {}, loaded: { items: false, todos: false, days: false } };
 let fs = null;
 let trip = null;
 
@@ -31,7 +31,7 @@ const other = (w) => (w === 'bruno' ? 'marco' : 'bruno');
 let toastT;
 function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600); }
 
-const mine = (it) => !it.shared || it.owner === state.who;
+const mine = (it) => (!it.only || it.only === state.who) && (!it.shared || it.owner === state.who);
 const statusOf = (it, who) => (it.s && it.s[who]) || 'falta';
 const isDone = (s) => s === 'tengo' || s === 'kit';
 const col = (name) => collection(fs, 'trips', trip, name);
@@ -138,7 +138,37 @@ function renderEtapa() {
   $('et-bar').style.background = done === total ? '#7CC4A0' : '#FB923C';
 }
 
+function renderInfo() {
+  const info = state.info.slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+  const flights = info.filter((x) => x.type === 'flight');
+  const stays = info.filter((x) => x.type === 'stay');
+  $('flights-wrap').hidden = !flights.length;
+  $('stays-wrap').hidden = !stays.length;
+  $('flights').innerHTML = flights.map((f) => {
+    const segs = (f.segments || []).map((g) => `<div class="seg">
+        <div class="seg-top"><span class="code">${esc(g.code)}</span><span class="muted">${esc(g.airline)}</span><span class="dur">${esc(g.dur || '')}</span></div>
+        <div class="seg-route">
+          <div class="pt"><div class="iata">${esc(g.from)}</div><div class="time">${esc(g.dep)}</div><div class="place">${esc(g.fromName)}</div></div>
+          <div class="path" aria-hidden="true"><i></i><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" transform="rotate(90 12 12)"/></svg><i></i></div>
+          <div class="pt end"><div class="iata">${esc(g.to)}</div><div class="time">${esc(g.arr)}${g.plus ? `<sup>${esc(g.plus)}</sup>` : ''}</div><div class="place">${esc(g.toName)}</div></div>
+        </div></div>`).join('<div class="layover" aria-hidden="true"></div>');
+    return `<article class="flight">
+      <header><div><div class="k">${esc(f.title)} · ${esc(PEOPLE[f.who] || '')}</div><div class="date">${esc(f.date)}</div></div></header>
+      ${segs}
+      <div class="bags"><span class="badge ${/Sin/.test(f.bag) ? 'falta' : 'tengo'}">${esc(f.bag)}</span><span class="badge kit">${esc(f.hand)}</span></div>
+      ${f.warn ? `<div class="warn">${esc(f.warn)}</div>` : ''}
+    </article>`;
+  }).join('');
+  $('stays').innerHTML = stays.map((h) => `<article class="card stay">
+      <div class="row-between" style="align-items:flex-start"><div><div style="font-family:var(--display);font-size:19px;font-weight:700">${esc(h.name)}</div>${h.alias ? `<div class="muted">${esc(h.alias)}</div>` : ''}</div>
+      ${h.maps ? `<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none;font-size:13px" href="${esc(h.maps)}" target="_blank" rel="noopener">Mapa</a>` : ''}</div>
+      <div class="chips" style="flex-wrap:wrap">${(h.nights || []).map((n) => `<span class="badge tengo">${esc(n)}</span>`).join('')}</div>
+      <dl class="facts"><dt>Dirección</dt><dd>${esc(h.address)}</dd>${h.phone ? `<dt>Teléfono</dt><dd>${esc(h.phone)}</dd>` : ''}${h.price ? `<dt>Pagado</dt><dd>${esc(h.price)}</dd>` : ''}</dl>
+    </article>`).join('');
+}
+
 function renderViaje() {
+  renderInfo();
   if (!state.loaded.days) return;
   const tags = { ok: ['Reservado', 'tengo'], camp: ['Organización', 'kit'], open: ['A definir', 'falta'] };
   const list = state.days.slice().sort((a, b) => (a.order || 0) - (b.order || 0));
@@ -222,6 +252,7 @@ function listen(name, key) {
   onSnapshot(col(name), (snap) => {
     const arr = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
     if (key === 'etapa') { const m = {}; arr.forEach((o) => { m[o.id] = o; }); state.etapa = m; renderEtapa(); return; }
+    if (key === 'info') { state.info = arr; renderInfo(); return; }
     state[key] = arr; state.loaded[key] = true;
     if (key === 'items') { renderHome(); renderEquipaje(); } else if (key === 'todos') renderTodos(); else renderViaje();
   }, (err) => {
@@ -231,21 +262,36 @@ function listen(name, key) {
   });
 }
 
-async function seedIfEmpty() {
+// The list file in the repo (src/seed.json) is the source for structure: the base list
+// is written once into an empty trip, then each numbered patch is merged once. Patches only
+// touch the fields they name, so what each person ticked in the app is kept.
+async function syncSeed() {
   if (!navigator.onLine) return;
   try {
-    const marker = await getDoc(doc(col('meta'), 'seed'));
-    if (marker.exists()) return;
-    const existing = await getDocsFromServer(col('items'));
-    if (!existing.empty) { await setDoc(doc(col('meta'), 'seed'), { at: Date.now() }); return; }
-    const all = [];
-    ['items', 'todos', 'days'].forEach((c) => SEED[c].forEach((o) => { const { id, ...rest } = o; all.push([c, id, rest]); }));
-    for (let i = 0; i < all.length; i += 400) {
-      const batch = writeBatch(fs);
-      all.slice(i, i + 400).forEach(([c, id, data]) => batch.set(doc(col(c), id), data));
-      await batch.commit();
+    const metaRef = doc(col('meta'), 'seed');
+    const marker = await getDoc(metaRef);
+    let applied = marker.exists() ? (marker.data().v || 1) : 0;
+    if (!applied) {
+      const existing = await getDocsFromServer(col('items'));
+      if (existing.empty) {
+        const all = [];
+        ['items', 'todos', 'days'].forEach((c) => (SEED[c] || []).forEach((o) => { const { id, ...rest } = o; all.push([c, id, rest]); }));
+        for (let i = 0; i < all.length; i += 400) {
+          const batch = writeBatch(fs);
+          all.slice(i, i + 400).forEach(([c, id, data]) => batch.set(doc(col(c), id), data));
+          await batch.commit();
+        }
+      }
+      applied = 1;
+      await setDoc(metaRef, { v: 1, at: Date.now() }, { merge: true });
     }
-    await setDoc(doc(col('meta'), 'seed'), { at: Date.now() });
+    for (const p of (SEED.patches || []).filter((x) => x.v > applied).sort((a, b) => a.v - b.v)) {
+      const batch = writeBatch(fs);
+      p.ops.forEach((op) => batch.set(doc(col(op.col), op.id), op.data, { merge: true }));
+      batch.set(metaRef, { v: p.v, at: Date.now() }, { merge: true });
+      await batch.commit();
+      applied = p.v;
+    }
   } catch (e) { console.error('seed', e); }
 }
 
@@ -253,8 +299,8 @@ function start(code) {
   trip = code;
   const app = initializeApp(window.FIREBASE_CONFIG);
   fs = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
-  listen('items', 'items'); listen('todos', 'todos'); listen('days', 'days'); listen('etapa', 'etapa');
-  seedIfEmpty();
+  listen('items', 'items'); listen('todos', 'todos'); listen('days', 'days'); listen('etapa', 'etapa'); listen('info', 'info');
+  syncSeed();
 }
 
 // ---------- join
