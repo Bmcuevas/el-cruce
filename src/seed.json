@@ -1,0 +1,1170 @@
+{
+"items": [
+{
+"bag": "botiquin",
+"name": "Aguja y alcohol",
+"note": "",
+"order": 66,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "aguja-y-alcohol"
+},
+{
+"bag": "campamento",
+"name": "Aislante",
+"note": "Conseguir en Campana",
+"order": 44,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "aislante"
+},
+{
+"bag": "campamento",
+"name": "Almohada inflable",
+"note": "",
+"order": 45,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "almohada-inflable"
+},
+{
+"bag": "botiquin",
+"name": "Analgésicos y antiinflamatorios",
+"note": "",
+"order": 67,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "analgesicos-y-antiinflamatorios"
+},
+{
+"bag": "carrera",
+"name": "Anteojos de sol",
+"note": "",
+"order": 14,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "anteojos-de-sol"
+},
+{
+"bag": "botiquin",
+"name": "Antidiarreico",
+"note": "",
+"order": 68,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "antidiarreico"
+},
+{
+"bag": "campamento",
+"name": "Antifaz y tapones",
+"note": "",
+"order": 46,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "antifaz-y-tapones"
+},
+{
+"bag": "carrera",
+"name": "Bastones",
+"note": "Bruno: 2 x Forclaz Hike 500 + puntas de goma",
+"order": 13,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "bastones"
+},
+{
+"bag": "campamento",
+"name": "Bolsa de dormir",
+"note": "La pone Marco. Confirmar temperatura de confort (0 °C o menos)",
+"order": 42,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "tengo"
+},
+"shared": false,
+"id": "bolsa-de-dormir"
+},
+{
+"bag": "obligatorio",
+"name": "Bolsa para residuos (Ziploc)",
+"note": "",
+"order": 11,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "bolsa-para-residuos-ziploc"
+},
+{
+"bag": "campamento",
+"name": "Bolsas estancas y Ziploc para la comida",
+"note": "",
+"order": 61,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "bolsas-estancas-y-ziploc-para-la-comida"
+},
+{
+"bag": "carrera",
+"name": "Botiquín chico",
+"note": "Curitas, gasa, cinta, parches, analgésico. Recargar cada tarde",
+"order": 20,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "botiquin-chico"
+},
+{
+"bag": "botiquin",
+"name": "Buscapina",
+"note": "",
+"order": 69,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "buscapina"
+},
+{
+"bag": "ropa",
+"name": "Calza larga",
+"note": "Para mañanas frías o lluvia",
+"order": 32,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "calza-larga"
+},
+{
+"bag": "ropa",
+"name": "Calzas cortas x2",
+"note": "",
+"order": 31,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "calzas-cortas-x2"
+},
+{
+"bag": "campamento",
+"name": "Campera de pluma o sintética",
+"note": "",
+"order": 47,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "campera-de-pluma-o-sintetica"
+},
+{
+"bag": "obligatorio",
+"name": "Campera impermeable",
+"note": "Viene en el kit",
+"order": 5,
+"owner": "",
+"s": {
+"bruno": "kit",
+"marco": "kit"
+},
+"shared": false,
+"id": "campera-impermeable"
+},
+{
+"bag": "campamento",
+"name": "Capas secas para la noche",
+"note": "Bruno: uno de los polares MH100",
+"order": 49,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "capas-secas-para-la-noche"
+},
+{
+"bag": "guardabolso",
+"name": "Cargador y ropa del viaje de vuelta",
+"note": "",
+"order": 76,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "cargador-y-ropa-del-viaje-de-vuelta"
+},
+{
+"bag": "carrera",
+"name": "Celular + bolsita estanca",
+"note": "En Decathlon: custodia impermeabile o sacca stagna",
+"order": 26,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "celular-bolsita-estanca"
+},
+{
+"bag": "guardabolso",
+"name": "Certificado médico impreso + digital",
+"note": "",
+"order": 78,
+"owner": "",
+"s": {
+"bruno": "verificar",
+"marco": "falta"
+},
+"shared": false,
+"id": "certificado-medico-impreso-digital"
+},
+{
+"bag": "obligatorio",
+"name": "Certificado médico",
+"note": "Original + copia en la acreditación. Confirmar si aceptan el italiano o usar el modelo oficial",
+"order": 1,
+"owner": "",
+"s": {
+"bruno": "verificar",
+"marco": "falta"
+},
+"shared": false,
+"id": "certificado-medico"
+},
+{
+"bag": "campamento",
+"name": "Chocolates, alfajores y snacks",
+"note": "Gustito post etapa",
+"order": 55,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "chocolates-alfajores-y-snacks"
+},
+{
+"bag": "ropa",
+"name": "Cinta kinesio / tape",
+"note": "",
+"order": 40,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "cinta-kinesio-tape"
+},
+{
+"bag": "campamento",
+"name": "Colchón inflable",
+"note": "O alquilarlo. Recomendado: Ultralight Isolant 183 x 55",
+"order": 43,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "colchon-inflable"
+},
+{
+"bag": "ropa",
+"name": "Cordones de repuesto",
+"note": "",
+"order": 38,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "cordones-de-repuesto"
+},
+{
+"bag": "carrera",
+"name": "Crema para paspaduras",
+"note": "",
+"order": 21,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "crema-para-paspaduras"
+},
+{
+"bag": "guardabolso",
+"name": "DNI / pasaporte",
+"note": "",
+"order": 77,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "dni-pasaporte"
+},
+{
+"bag": "obligatorio",
+"name": "Dorsal, pechera y chip",
+"note": "Se reciben en la acreditación",
+"order": 12,
+"owner": "",
+"s": {
+"bruno": "kit",
+"marco": "kit"
+},
+"shared": false,
+"id": "dorsal-pechera-y-chip"
+},
+{
+"bag": "carrera",
+"name": "Efectivo + foto del documento",
+"note": "",
+"order": 27,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "efectivo-foto-del-documento"
+},
+{
+"bag": "carrera",
+"name": "Electrolitos",
+"note": "",
+"order": 24,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "electrolitos"
+},
+{
+"bag": "carrera",
+"name": "Frontal",
+"note": "Bruno: HL50, básica. Sirve para el campamento",
+"order": 19,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "frontal"
+},
+{
+"bag": "botiquin",
+"name": "Gasas, cinta hipoalergénica, curitas",
+"note": "",
+"order": 64,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "gasas-cinta-hipoalergenica-curitas"
+},
+{
+"bag": "carrera",
+"name": "Geles, barras y gomitas",
+"note": "+ extra de emergencia",
+"order": 23,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "geles-barras-y-gomitas"
+},
+{
+"bag": "carrera",
+"name": "Gorra + buff",
+"note": "",
+"order": 17,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "gorra-buff"
+},
+{
+"bag": "obligatorio",
+"name": "Gorro de abrigo",
+"note": "",
+"order": 8,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "gorro-de-abrigo"
+},
+{
+"bag": "campamento",
+"name": "Gorro de lana y guantes",
+"note": "",
+"order": 51,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "gorro-de-lana-y-guantes"
+},
+{
+"bag": "botiquin",
+"name": "Gotas para ojos",
+"note": "",
+"order": 71,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "gotas-para-ojos"
+},
+{
+"bag": "carrera",
+"name": "Guantes de primera piel",
+"note": "Bruno: MT500 stretch, M",
+"order": 18,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "guantes-de-primera-piel"
+},
+{
+"bag": "campamento",
+"name": "Higiene: cepillo, pasta, desodorante",
+"note": "",
+"order": 54,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "higiene-cepillo-pasta-desodorante"
+},
+{
+"bag": "campamento",
+"name": "Jabón y shampoo seco",
+"note": "",
+"order": 58,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "jabon-y-shampoo-seco"
+},
+{
+"bag": "campamento",
+"name": "Jarro térmico",
+"note": "",
+"order": 63,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "jarro-termico"
+},
+{
+"bag": "campamento",
+"name": "Malla y toalla de microfibra",
+"note": "",
+"order": 53,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "malla-y-toalla-de-microfibra"
+},
+{
+"bag": "obligatorio",
+"name": "Manta de supervivencia",
+"note": "",
+"order": 4,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "manta-de-supervivencia"
+},
+{
+"bag": "carrera",
+"name": "Manteca de cacao",
+"note": "",
+"order": 16,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "manteca-de-cacao"
+},
+{
+"bag": "campamento",
+"name": "Mate, termo y yerba",
+"note": "",
+"order": 62,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "mate-termo-y-yerba"
+},
+{
+"bag": "ropa",
+"name": "Medias de trail x4",
+"note": "Sintéticas o merino, caña media",
+"order": 33,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "medias-de-trail-x4"
+},
+{
+"bag": "campamento",
+"name": "Medias gruesas",
+"note": "",
+"order": 50,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "medias-gruesas"
+},
+{
+"bag": "obligatorio",
+"name": "Micropolar",
+"note": "Bruno: 2 polares MH100, M. Viene otro en el kit",
+"order": 7,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "micropolar"
+},
+{
+"bag": "obligatorio",
+"name": "Mochila con agua 1 L mínimo",
+"note": "Bruno: Kiprun 10 L verde, M/L. Revisar qué agua trae",
+"order": 2,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "mochila-con-agua-1-l-minimo"
+},
+{
+"bag": "guardabolso",
+"name": "Muda limpia + zapatillas urbanas",
+"note": "",
+"order": 74,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "muda-limpia-zapatillas-urbanas"
+},
+{
+"bag": "ropa",
+"name": "Nutrición etapas 2 y 3",
+"note": "Una bolsa por día",
+"order": 41,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "nutricion-etapas-2-y-3"
+},
+{
+"bag": "campamento",
+"name": "Pantalón de abrigo",
+"note": "",
+"order": 48,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "pantalon-de-abrigo"
+},
+{
+"bag": "carrera",
+"name": "Papel higiénico + toallitas",
+"note": "",
+"order": 28,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "papel-higienico-toallitas"
+},
+{
+"bag": "botiquin",
+"name": "Parches tipo Compeed + moleskin",
+"note": "Moleskin en farmacias de Argentina",
+"order": 65,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "parches-tipo-compeed-moleskin"
+},
+{
+"bag": "guardabolso",
+"name": "Pasajes, alojamiento, inscripción",
+"note": "",
+"order": 80,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "pasajes-alojamiento-inscripcion"
+},
+{
+"bag": "campamento",
+"name": "Pilas y bolsas para ropa sucia",
+"note": "",
+"order": 57,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "pilas-y-bolsas-para-ropa-sucia"
+},
+{
+"bag": "ropa",
+"name": "Polainas cortas",
+"note": "Opcional",
+"order": 37,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "polainas-cortas"
+},
+{
+"bag": "campamento",
+"name": "Power bank grande + cables",
+"note": "",
+"order": 60,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "power-bank-grande-cables"
+},
+{
+"bag": "obligatorio",
+"name": "Primera capa térmica",
+"note": "Bruno: Kipsta Keepdry, M. Viene otra en el kit",
+"order": 6,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "primera-capa-termica"
+},
+{
+"bag": "carrera",
+"name": "Protector solar chico",
+"note": "",
+"order": 15,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "protector-solar-chico"
+},
+{
+"bag": "botiquin",
+"name": "Protector solar grande y repelente",
+"note": "",
+"order": 72,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "protector-solar-grande-y-repelente"
+},
+{
+"bag": "campamento",
+"name": "Recuperador post etapa x3",
+"note": "",
+"order": 56,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "recuperador-post-etapa-x3"
+},
+{
+"bag": "carrera",
+"name": "Reloj GPS",
+"note": "",
+"order": 25,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "reloj-gps"
+},
+{
+"bag": "ropa",
+"name": "Remera térmica",
+"note": "Bruno: Kipsta Keepdry",
+"order": 30,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "remera-termica"
+},
+{
+"bag": "ropa",
+"name": "Remeras técnicas x3",
+"note": "Una por etapa. Sirven las de carreras, no de algodón",
+"order": 29,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "remeras-tecnicas-x3"
+},
+{
+"bag": "ropa",
+"name": "Ropa interior técnica",
+"note": "No hace falta si las calzas traen slip",
+"order": 34,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "ropa-interior-tecnica"
+},
+{
+"bag": "campamento",
+"name": "Sandalias u ojotas",
+"note": "",
+"order": 52,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "sandalias-u-ojotas"
+},
+{
+"bag": "guardabolso",
+"name": "Seguro de viaje con cobertura de montaña",
+"note": "Bruno: Swiss Medical",
+"order": 79,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "seguro-de-viaje-con-cobertura-de-montana"
+},
+{
+"bag": "obligatorio",
+"name": "Silbato",
+"note": "Fijate si la mochila ya lo trae",
+"order": 9,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "silbato"
+},
+{
+"bag": "campamento",
+"name": "Soga y broches para colgar la ropa",
+"note": "",
+"order": 59,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "soga-y-broches-para-colgar-la-ropa"
+},
+{
+"bag": "guardabolso",
+"name": "Toalla, ducha y ojotas",
+"note": "",
+"order": 75,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "toalla-ducha-y-ojotas"
+},
+{
+"bag": "carrera",
+"name": "Vaselina chica",
+"note": "",
+"order": 22,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "vaselina-chica"
+},
+{
+"bag": "botiquin",
+"name": "Vaselina extra",
+"note": "",
+"order": 73,
+"owner": "bruno",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "vaselina-extra"
+},
+{
+"bag": "obligatorio",
+"name": "Vaso soft",
+"note": "Viene en el kit",
+"order": 10,
+"owner": "",
+"s": {
+"bruno": "kit",
+"marco": "kit"
+},
+"shared": false,
+"id": "vaso-soft"
+},
+{
+"bag": "ropa",
+"name": "Vendas / cinta para dedos",
+"note": "Cuidar las uñas en las bajadas",
+"order": 39,
+"owner": "",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": false,
+"id": "vendas-cinta-para-dedos"
+},
+{
+"bag": "botiquin",
+"name": "Victorinox + pinza",
+"note": "En el avión, despachada",
+"order": 70,
+"owner": "marco",
+"s": {
+"bruno": "falta",
+"marco": "falta"
+},
+"shared": true,
+"id": "victorinox-pinza"
+},
+{
+"bag": "obligatorio",
+"name": "Vivac",
+"note": "Bruno: Rescue bag 1 posto. Se puede alquilar a la organización",
+"order": 3,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "vivac"
+},
+{
+"bag": "ropa",
+"name": "Zapatillas de running viejas (2º par)",
+"note": "Repuesto si las de trail quedan empapadas",
+"order": 36,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "zapatillas-de-running-viejas-2-par"
+},
+{
+"bag": "ropa",
+"name": "Zapatillas de trail",
+"note": "Entrenar con ellas antes",
+"order": 35,
+"owner": "",
+"s": {
+"bruno": "tengo",
+"marco": "falta"
+},
+"shared": false,
+"id": "zapatillas-de-trail"
+}
+],
+"todos": [
+{
+"done": false,
+"order": 1,
+"text": "Dónde dormimos la noche del 7 al 8 (ruta)",
+"who": "both",
+"id": "t01"
+},
+{
+"done": false,
+"order": 2,
+"text": "12 dic: ¿Bariloche o salimos a Mendoza?",
+"who": "both",
+"id": "t02"
+},
+{
+"done": false,
+"order": 3,
+"text": "SIM y plan para trabajar desde Argentina",
+"who": "both",
+"id": "t03"
+},
+{
+"done": false,
+"order": 4,
+"text": "Confirmar si aceptan el certificado médico italiano",
+"who": "bruno",
+"id": "t04"
+},
+{
+"done": false,
+"order": 5,
+"text": "Temperatura de confort de la bolsa de dormir",
+"who": "marco",
+"id": "t05"
+},
+{
+"done": false,
+"order": 6,
+"text": "Revisar qué agua trae la mochila (1 L)",
+"who": "bruno",
+"id": "t06"
+},
+{
+"done": false,
+"order": 7,
+"text": "Seguro médico con Swiss Medical",
+"who": "bruno",
+"id": "t07"
+},
+{
+"done": false,
+"order": 8,
+"text": "Reservar masajes en el campamento (opcional)",
+"who": "both",
+"id": "t08"
+}
+],
+"days": [
+{
+"detail": "En auto, con parada a mitad de camino.",
+"dow": "Lun",
+"kind": "open",
+"night": "Noche en la ruta",
+"num": "7",
+"order": 1,
+"race": false,
+"title": "Ruta hacia Bariloche",
+"id": "d07"
+},
+{
+"detail": "Acreditación con turno y entrega del bolso de corredor (el día antes de largar).",
+"dow": "Mar",
+"kind": "ok",
+"night": "Bariloche",
+"num": "8",
+"order": 2,
+"race": false,
+"title": "Llegada a Bariloche",
+"id": "d08"
+},
+{
+"detail": "Largada en Cerro Catedral. Dejar el guardabolso a la mañana.",
+"dow": "Mié",
+"kind": "camp",
+"night": "Campamento 1",
+"num": "9",
+"order": 3,
+"race": true,
+"title": "Etapa 1",
+"id": "d09"
+},
+{
+"detail": "",
+"dow": "Jue",
+"kind": "camp",
+"night": "Campamento 2",
+"num": "10",
+"order": 4,
+"race": true,
+"title": "Etapa 2",
+"id": "d10"
+},
+{
+"detail": "Llegada a Cerro Catedral. Retirar el guardabolso.",
+"dow": "Vie",
+"kind": "ok",
+"night": "Bariloche",
+"num": "11",
+"order": 5,
+"race": true,
+"title": "Etapa 3",
+"id": "d11"
+},
+{
+"detail": "",
+"dow": "Sáb",
+"kind": "open",
+"night": "Noche del 12 al 13",
+"num": "12",
+"order": 6,
+"race": false,
+"title": "¿Bariloche o salida a Mendoza?",
+"id": "d12"
+}
+]
+}

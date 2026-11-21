@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>El Cruce 2026</title>
+<meta name="theme-color" content="#16242A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="El Cruce">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+
+<header class="top">
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:8px"><div class="brand">El Cruce 2026</div><span class="sync" id="sync">Conectando…</span></div>
+    <div class="who" role="group" aria-label="Ver la lista de">
+      <button type="button" id="who-bruno" data-who="bruno" aria-pressed="true"><span class="dot bruno"></span>Bruno</button>
+      <button type="button" id="who-marco" data-who="marco" aria-pressed="false"><span class="dot marco"></span>Marco</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div id="status" class="state" hidden></div>
+
+    <section class="view" id="v-inicio" aria-label="Inicio">
+      <div class="hero">
+        <svg aria-hidden="true" width="360" height="110" viewBox="0 0 360 110"><path d="M0 110 L60 46 L100 74 L160 18 L215 70 L250 42 L315 92 L360 64 L360 110 Z" fill="#9FC3D4"></path></svg>
+        <div class="k">Largada Etapa 1</div>
+        <div class="big" id="countdown">—</div>
+        <div class="sub">Miércoles 9 dic · Cerro Catedral, Bariloche</div>
+        <div class="pill">Grupo 5 · Extranjeros</div>
+      </div>
+      <div class="card">
+        <div class="row-between"><h2 id="home-bags-title">Equipaje</h2><a class="linkbtn" href="#equipaje">Ver todo</a></div>
+        <div id="home-bags"><p class="muted">Cargando la lista…</p></div>
+        <div id="home-missing" class="muted" style="color: var(--alert); font-weight: 500"></div>
+      </div>
+      <div class="card">
+        <div class="row-between"><h2>Para resolver</h2><span class="muted" id="todo-count"></span></div>
+        <div id="todos"><p class="muted">Cargando…</p></div>
+      </div>
+    </section>
+
+    <section class="view" id="v-equipaje" aria-label="Equipaje" hidden>
+      <h1 style="font-size: 26px" id="eq-title">Equipaje</h1>
+      <div class="chips" id="bag-chips" role="group" aria-label="Bolso"></div>
+      <div class="row-between" style="align-items: center">
+        <div><div class="muted">Listo</div><div id="bag-count" style="font-family: var(--display); font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums">—</div></div>
+        <label class="filter" for="only-missing"><input type="checkbox" id="only-missing"> Solo lo que me falta</label>
+      </div>
+      <div class="list" id="items"><p class="state">Cargando la lista…</p></div>
+      <p class="muted" style="margin: 0 4px">Tocá un ítem para pasarlo de Falta a Tengo. Lo que dice Kit lo entrega la organización.</p>
+      <details class="other" id="other-wrap">
+        <summary id="other-title">Compartido que lleva el otro</summary>
+        <div id="other-items"></div>
+      </details>
+      <div class="card">
+        <h2 style="font-size: 16px">Agregar al bolso</h2>
+        <form class="add" id="add-form">
+          <div class="r">
+            <label class="sr" for="add-name" hidden>Nombre del ítem</label>
+            <input type="text" id="add-name" aria-label="Nombre del ítem" placeholder="Ej.: cargador del reloj" autocomplete="off" required>
+            <button class="btn" type="submit">Agregar</button>
+          </div>
+          <label class="filter" for="add-shared"><input type="checkbox" id="add-shared"> Compartido: lo llevo yo para los dos</label>
+        </form>
+      </div>
+    </section>
+
+    <section class="view" id="v-etapa" aria-label="Modo etapa" hidden>
+      <div class="night">
+        <div class="k" id="et-who">Checklist de la noche</div>
+        <h2 id="et-title">Etapa 1</h2>
+        <div class="stages" role="group" aria-label="Etapa">
+          <button type="button" data-stage="1">Etapa 1</button>
+          <button type="button" data-stage="2">Etapa 2</button>
+          <button type="button" data-stage="3">Etapa 3</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div class="bar" style="flex: 1; height: 10px"><i id="et-bar" style="width: 0%; background: #FB923C"></i></div>
+          <div id="et-count" style="font-weight: 600; font-variant-numeric: tabular-nums">0 de 0</div>
+        </div>
+        <div id="et-lists" class="stack"></div>
+        <button type="button" class="btn ghost" id="et-reset">Empezar de nuevo esta etapa</button>
+      </div>
+    </section>
+
+    <section class="view" id="v-viaje" aria-label="Viaje" hidden>
+      <div><h1 style="font-size: 26px">Viaje</h1><div class="muted" id="trip-sub">7 – 12 dic</div></div>
+      <div id="days"><p class="state">Cargando el itinerario…</p></div>
+    </section>
+  </div>
+</main>
+
+<nav class="tabs" aria-label="Secciones">
+  <div class="wrap">
+    <a href="#inicio" data-tab="inicio"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+    <a href="#equipaje" data-tab="equipaje"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="7" width="14" height="14" rx="3"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></svg>Equipaje</a>
+    <a href="#etapa" data-tab="etapa"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20l6-11 4 6 3-4 5 9z"/></svg>Etapa</a>
+    <a href="#viaje" data-tab="viaje"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Viaje</a>
+  </div>
+</nav>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+
+<div class="join" id="join" hidden>
+  <form class="box" id="join-form">
+    <div class="brand">El Cruce 2026</div>
+    <h1>Entrar al viaje</h1>
+    <p class="muted" style="margin:0">Pegá el código del viaje que te pasó Bruno. Se guarda en este celular y no te lo vuelve a pedir.</p>
+    <label for="join-code" class="muted">Código del viaje</label>
+    <input id="join-code" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+    <div class="muted">¿Quién sos?</div>
+    <div class="who" role="group" aria-label="Quién sos">
+      <button type="button" data-join-who="bruno" aria-pressed="true"><span class="dot bruno"></span>Bruno</button>
+      <button type="button" data-join-who="marco" aria-pressed="false"><span class="dot marco"></span>Marco</button>
+    </div>
+    <div class="err" id="join-err" role="alert"></div>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+</div>
+
+<script src="firebase-config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

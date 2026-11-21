@@ -1,0 +1,299 @@
+import { initializeApp } from 'firebase/app';
+import {
+  initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
+  collection, doc, onSnapshot, updateDoc, setDoc, addDoc, writeBatch, getDocsFromServer, getDoc
+} from 'firebase/firestore';
+import SEED from './seed.json';
+
+const PEOPLE = { bruno: 'Bruno', marco: 'Marco' };
+const BAGS = [
+  ['obligatorio', 'Obligatorio'], ['carrera', 'Mochila de carrera'], ['ropa', 'Ropa de carrera'],
+  ['campamento', 'Campamento'], ['botiquin', 'Botiquín'], ['guardabolso', 'Guardabolso y papeles']
+];
+const BAG_COLOR = { obligatorio: 'var(--alert)', carrera: 'var(--lake)', ropa: 'var(--lake)', campamento: 'var(--forest)', botiquin: 'var(--forest)', guardabolso: 'var(--muted)' };
+const LABEL = { tengo: 'Tengo', falta: 'Falta', kit: 'Kit', verificar: 'Verificar' };
+const ETAPA = [
+  { title: 'Obligatorio', color: '#FB923C', items: ['Agua 1 L cargada', 'Vivac', 'Manta de supervivencia', 'Campera impermeable', 'Primera capa térmica', 'Micropolar', 'Gorro de abrigo', 'Silbato', 'Vaso soft', 'Bolsa para residuos', 'Dorsal y chip'] },
+  { title: 'Carrera', color: '#9FC3D4', items: ['Bastones', 'Anteojos de sol', 'Gorra y buff', 'Protector solar y manteca de cacao', 'Geles, barras y electrolitos de la etapa', 'Botiquín chico recargado', 'Reloj y celular cargados', 'Frontal', 'Vaselina en los pies', 'Papel y toallitas'] }
+];
+const STAGE_DAY = { 1: 'miércoles 9 dic', 2: 'jueves 10 dic', 3: 'viernes 11 dic' };
+const VIEWS = ['inicio', 'equipaje', 'etapa', 'viaje'];
+
+const state = { who: 'bruno', bag: 'obligatorio', onlyMissing: false, items: [], todos: [], days: [], etapa: {}, loaded: { items: false, todos: false, days: false } };
+let fs = null;
+let trip = null;
+
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const slug = (s) => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } return null; };
+const other = (w) => (w === 'bruno' ? 'marco' : 'bruno');
+let toastT;
+function toast(msg) { const t = $('toast'); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => { t.hidden = true; }, 2600); }
+
+const mine = (it) => !it.shared || it.owner === state.who;
+const statusOf = (it, who) => (it.s && it.s[who]) || 'falta';
+const isDone = (s) => s === 'tengo' || s === 'kit';
+const col = (name) => collection(fs, 'trips', trip, name);
+
+// ---------- sync indicator
+function renderSync() {
+  const el = $('sync');
+  if (!navigator.onLine) { el.textContent = 'Sin señal · guarda igual'; el.className = 'sync off'; }
+  else { el.textContent = 'En línea'; el.className = 'sync'; }
+}
+window.addEventListener('online', renderSync);
+window.addEventListener('offline', renderSync);
+
+// ---------- render
+function countdown() {
+  const race = new Date(2026, 11, 9); const now = new Date(); now.setHours(0, 0, 0, 0);
+  const d = Math.round((race - now) / 86400000);
+  $('countdown').textContent = d > 1 ? d + ' días' : d === 1 ? 'Mañana' : d === 0 ? 'Hoy' : d >= -2 ? 'En carrera' : 'Terminado';
+}
+
+function renderWho() {
+  ['bruno', 'marco'].forEach((w) => $('who-' + w).setAttribute('aria-pressed', String(w === state.who)));
+  $('home-bags-title').textContent = 'Equipaje de ' + PEOPLE[state.who];
+  $('eq-title').textContent = 'Equipaje de ' + PEOPLE[state.who];
+  $('et-who').textContent = 'Checklist de la noche · ' + PEOPLE[state.who];
+  $('other-title').textContent = 'Compartido que lleva ' + PEOPLE[other(state.who)];
+}
+
+function renderHome() {
+  if (!state.loaded.items) return;
+  let html = '';
+  const missing = [];
+  BAGS.forEach(([key, label]) => {
+    const list = state.items.filter((it) => it.bag === key && mine(it));
+    if (!list.length) return;
+    const done = list.filter((it) => isDone(statusOf(it, state.who))).length;
+    if (key === 'obligatorio') list.forEach((it) => { if (!isDone(statusOf(it, state.who))) missing.push(it.name); });
+    const pct = Math.round((done / list.length) * 100);
+    html += `<div class="prog"><div class="row-between"><span style="font-weight:500">${esc(label)}</span><span>${done} / ${list.length}</span></div><div class="bar"><i style="width:${pct}%;background:${BAG_COLOR[key]}"></i></div></div>`;
+  });
+  const box = $('home-bags');
+  box.innerHTML = html || '<p class="muted">Todavía no hay ítems en la lista.</p>';
+  box.style.display = 'flex'; box.style.flexDirection = 'column'; box.style.gap = '12px';
+  $('home-missing').textContent = missing.length ? 'Pendiente del obligatorio: ' + missing.join(', ') : 'Obligatorio completo.';
+}
+
+function renderTodos() {
+  if (!state.loaded.todos) return;
+  const list = state.todos.slice().sort((a, b) => (a.done - b.done) || ((a.order || 0) - (b.order || 0)));
+  const open = list.filter((t) => !t.done).length;
+  $('todo-count').textContent = open ? open + ' abiertos' : 'Todo resuelto';
+  $('todos').innerHTML = list.length ? list.map((t) => {
+    const who = t.who === 'marco' ? 'marco' : t.who === 'bruno' ? 'bruno' : 'both';
+    const ini = who === 'both' ? 'BM' : PEOPLE[who][0];
+    const check = t.done ? '<svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>' : '';
+    return `<button type="button" class="todo${t.done ? ' done' : ''}" data-todo="${esc(t.id)}" aria-pressed="${!!t.done}"><span class="box">${check}</span><span class="t">${esc(t.text)}</span><span class="av ${who}" aria-label="${who === 'both' ? 'Los dos' : PEOPLE[who]}">${ini}</span></button>`;
+  }).join('') : '<p class="muted">Nada pendiente.</p>';
+}
+
+function itemRow(it, who, readonly) {
+  const s = statusOf(it, who);
+  const note = it.note ? `<span class="note">${esc(it.note)}</span>` : '';
+  const tag = it.shared ? `<span class="tag">Compartido · lo lleva ${esc(PEOPLE[it.owner] || '')}</span>` : '';
+  return `<button type="button" class="item" data-item="${esc(it.id)}"${readonly || s === 'kit' ? ' disabled' : ''} aria-label="${esc(it.name)}: ${LABEL[s]}"><span class="txt">${tag}<span class="name">${esc(it.name)}</span>${note}</span><span class="badge ${s}">${LABEL[s]}</span></button>`;
+}
+
+function renderEquipaje() {
+  $('bag-chips').innerHTML = BAGS.map(([key, label]) => {
+    const list = state.items.filter((it) => it.bag === key && mine(it));
+    const miss = list.filter((it) => !isDone(statusOf(it, state.who))).length;
+    return `<button type="button" data-bag="${key}" aria-pressed="${state.bag === key}">${esc(label)}${miss ? `<span class="n">${miss}</span>` : ''}</button>`;
+  }).join('');
+  if (!state.loaded.items) return;
+  const list = state.items.filter((it) => it.bag === state.bag && mine(it)).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const done = list.filter((it) => isDone(statusOf(it, state.who))).length;
+  $('bag-count').textContent = done + ' de ' + list.length;
+  const shown = state.onlyMissing ? list.filter((it) => !isDone(statusOf(it, state.who))) : list;
+  $('items').innerHTML = shown.length ? shown.map((it) => itemRow(it, state.who, false)).join('')
+    : `<p class="state">${list.length ? 'No te falta nada de este bolso.' : 'Este bolso está vacío. Agregá el primer ítem abajo.'}</p>`;
+  const o = other(state.who);
+  const others = state.items.filter((it) => it.bag === state.bag && it.shared && it.owner === o);
+  $('other-wrap').hidden = !others.length;
+  $('other-items').innerHTML = others.map((it) => itemRow(it, o, true)).join('');
+}
+
+function renderEtapa() {
+  const e = state.etapa[state.who] || { stage: 1, done: {} };
+  const stage = e.stage || 1;
+  const doneMap = (e.done && e.done['s' + stage]) || {};
+  $('et-title').textContent = 'Etapa ' + stage + ' · ' + STAGE_DAY[stage];
+  document.querySelectorAll('[data-stage]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.stage) === stage)));
+  let total = 0; let done = 0; let html = '';
+  ETAPA.forEach((g) => {
+    html += `<div class="grp" style="color:${g.color}">${g.title}</div>`;
+    g.items.forEach((name) => {
+      const k = slug(name); total++; const on = !!doneMap[k]; if (on) done++;
+      const check = on ? '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0E181C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>' : '';
+      html += `<button type="button" class="check" data-check="${k}" aria-pressed="${on}"><span class="cb">${check}</span><span>${esc(name)}</span></button>`;
+    });
+  });
+  $('et-lists').innerHTML = html;
+  $('et-count').textContent = done + ' de ' + total;
+  $('et-bar').style.width = Math.round((done / total) * 100) + '%';
+  $('et-bar').style.background = done === total ? '#7CC4A0' : '#FB923C';
+}
+
+function renderViaje() {
+  if (!state.loaded.days) return;
+  const tags = { ok: ['Reservado', 'tengo'], camp: ['Organización', 'kit'], open: ['A definir', 'falta'] };
+  const list = state.days.slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+  const openN = list.filter((d) => d.kind === 'open').length;
+  $('trip-sub').textContent = list.length ? `${list[0].num} – ${list[list.length - 1].num} dic${openN ? ` · ${openN} ${openN === 1 ? 'noche' : 'noches'} sin definir` : ''}` : '';
+  $('days').innerHTML = list.length ? list.map((d) => {
+    const t = tags[d.kind] || tags.open;
+    return `<div class="day"><div class="d"><div class="dow">${esc(d.dow)}</div><div class="num${d.race ? ' race' : ''}">${esc(d.num)}</div><div class="line"></div></div>`
+      + `<div class="card${d.kind === 'open' ? ' open' : ''}"><div style="font-weight:600;font-size:16px">${esc(d.title)}</div>${d.detail ? `<div class="muted">${esc(d.detail)}</div>` : ''}`
+      + `<div class="night-row"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8l9-5 9 5v10"/><path d="M3 18h18M9 18v-5h6v5"/></svg><span>${esc(d.night)}</span><span class="badge ${t[1]}">${t[0]}</span></div></div></div>`;
+  }).join('') : '<p class="state">Todavía no hay días cargados.</p>';
+}
+
+function renderAll() { renderWho(); renderHome(); renderTodos(); renderEquipaje(); renderEtapa(); renderViaje(); }
+
+// ---------- routing
+function route() {
+  let h = (location.hash || '').slice(1); if (!VIEWS.includes(h)) h = 'inicio';
+  VIEWS.forEach((v) => { $('v-' + v).hidden = v !== h; });
+  document.querySelectorAll('nav.tabs a').forEach((a) => { if (a.dataset.tab === h) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+  window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+
+// ---------- writes (fire and forget: offline writes queue locally and sync later)
+const fail = (e) => { console.error(e); toast('No se pudo guardar. Revisá el código del viaje.'); };
+
+document.addEventListener('click', (ev) => {
+  let b;
+  if ((b = ev.target.closest('[data-join-who]'))) {
+    document.querySelectorAll('[data-join-who]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    return;
+  }
+  if (!fs) return;
+  if ((b = ev.target.closest('[data-who]'))) { state.who = b.dataset.who; store('cruce-who', state.who); renderAll(); return; }
+  if ((b = ev.target.closest('[data-bag]'))) { state.bag = b.dataset.bag; store('cruce-bag', state.bag); renderEquipaje(); return; }
+  if ((b = ev.target.closest('[data-item]'))) {
+    if (b.disabled) return;
+    const it = state.items.find((x) => x.id === b.dataset.item); if (!it) return;
+    const s = statusOf(it, state.who); if (s === 'kit') return;
+    const next = s === 'tengo' ? 'falta' : 'tengo';
+    updateDoc(doc(col('items'), it.id), { ['s.' + state.who]: next }).catch(fail);
+    return;
+  }
+  if ((b = ev.target.closest('[data-todo]'))) {
+    const t = state.todos.find((x) => x.id === b.dataset.todo); if (!t) return;
+    updateDoc(doc(col('todos'), t.id), { done: !t.done }).catch(fail);
+    return;
+  }
+  if ((b = ev.target.closest('[data-stage]'))) {
+    setDoc(doc(col('etapa'), state.who), { stage: Number(b.dataset.stage) }, { merge: true }).catch(fail);
+    return;
+  }
+  if ((b = ev.target.closest('[data-check]'))) {
+    const e = state.etapa[state.who] || { stage: 1, done: {} };
+    const key = 's' + (e.stage || 1);
+    const cur = !!(e.done && e.done[key] && e.done[key][b.dataset.check]);
+    setDoc(doc(col('etapa'), state.who), { stage: e.stage || 1, done: { [key]: { [b.dataset.check]: !cur } } }, { merge: true }).catch(fail);
+  }
+});
+
+$('et-reset').addEventListener('click', () => {
+  if (!fs) return;
+  const e = state.etapa[state.who] || { stage: 1, done: {} };
+  const done = Object.assign({}, e.done); done['s' + (e.stage || 1)] = {};
+  setDoc(doc(col('etapa'), state.who), { stage: e.stage || 1, done }).catch(fail);
+});
+$('only-missing').addEventListener('change', (ev) => { state.onlyMissing = ev.target.checked; renderEquipaje(); });
+$('add-form').addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  const name = $('add-name').value.trim(); if (!name || !fs) return;
+  const shared = $('add-shared').checked;
+  const order = state.items.reduce((m, it) => Math.max(m, it.order || 0), 0) + 1;
+  addDoc(col('items'), { bag: state.bag, name: name.slice(0, 120), note: '', shared, owner: shared ? state.who : '', order, s: { bruno: 'falta', marco: 'falta' } }).catch(fail);
+  $('add-name').value = ''; $('add-shared').checked = false;
+  toast('Agregado a ' + BAGS.find((b) => b[0] === state.bag)[1]);
+});
+
+// ---------- data
+function listen(name, key) {
+  onSnapshot(col(name), (snap) => {
+    const arr = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+    if (key === 'etapa') { const m = {}; arr.forEach((o) => { m[o.id] = o; }); state.etapa = m; renderEtapa(); return; }
+    state[key] = arr; state.loaded[key] = true;
+    if (key === 'items') { renderHome(); renderEquipaje(); } else if (key === 'todos') renderTodos(); else renderViaje();
+  }, (err) => {
+    console.error(err);
+    $('status').textContent = err.code === 'permission-denied' ? 'El código del viaje no es válido.' : 'No se pudo leer la lista. Probá recargar.';
+    $('status').hidden = false;
+  });
+}
+
+async function seedIfEmpty() {
+  if (!navigator.onLine) return;
+  try {
+    const marker = await getDoc(doc(col('meta'), 'seed'));
+    if (marker.exists()) return;
+    const existing = await getDocsFromServer(col('items'));
+    if (!existing.empty) { await setDoc(doc(col('meta'), 'seed'), { at: Date.now() }); return; }
+    const all = [];
+    ['items', 'todos', 'days'].forEach((c) => SEED[c].forEach((o) => { const { id, ...rest } = o; all.push([c, id, rest]); }));
+    for (let i = 0; i < all.length; i += 400) {
+      const batch = writeBatch(fs);
+      all.slice(i, i + 400).forEach(([c, id, data]) => batch.set(doc(col(c), id), data));
+      await batch.commit();
+    }
+    await setDoc(doc(col('meta'), 'seed'), { at: Date.now() });
+  } catch (e) { console.error('seed', e); }
+}
+
+function start(code) {
+  trip = code;
+  const app = initializeApp(window.FIREBASE_CONFIG);
+  fs = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+  listen('items', 'items'); listen('todos', 'todos'); listen('days', 'days'); listen('etapa', 'etapa');
+  seedIfEmpty();
+}
+
+// ---------- join
+function codeFromHash() {
+  const m = /^#v-([A-Za-z0-9]{16,64})$/.exec(location.hash || '');
+  return m ? m[1] : null;
+}
+
+function boot() {
+  state.who = store('cruce-who') === 'marco' ? 'marco' : 'bruno';
+  const savedBag = store('cruce-bag'); if (savedBag && BAGS.some((b) => b[0] === savedBag)) state.bag = savedBag;
+  countdown(); renderSync();
+
+  const cfg = window.FIREBASE_CONFIG;
+  if (!cfg || !cfg.projectId) {
+    $('status').textContent = 'Falta configurar Firebase (firebase-config.js).'; $('status').hidden = false;
+    route(); renderAll(); return;
+  }
+
+  const fromLink = codeFromHash();
+  if (fromLink) { store('cruce-trip', fromLink); history.replaceState(null, '', location.pathname); }
+  const code = fromLink || store('cruce-trip');
+  route(); renderAll();
+  if (code) { start(code); return; }
+
+  $('join').hidden = false;
+  $('join-form').addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    let v = $('join-code').value.trim();
+    const m = /#v-([A-Za-z0-9]{16,64})/.exec(v); if (m) v = m[1];
+    if (!/^[A-Za-z0-9]{16,64}$/.test(v)) { $('join-err').textContent = 'El código tiene que tener al menos 16 letras o números.'; return; }
+    const who = document.querySelector('[data-join-who][aria-pressed="true"]').dataset.joinWho;
+    store('cruce-trip', v); store('cruce-who', who); state.who = who;
+    $('join').hidden = true; renderAll(); start(v);
+  });
+}
+
+boot();
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
