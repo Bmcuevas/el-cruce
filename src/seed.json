@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 5,
+"version": 6,
 "patches": [
 {
 "v": 2,
@@ -1495,6 +1495,28 @@
 "sub": "Etapas, altimetría y mapas · elcruce.com.ar",
 "url": "https://elcruce.com.ar/recorridos/",
 "icon": "map"
+}
+}
+]
+},
+{
+"v": 6,
+"ops": [
+{
+"col": "todos",
+"id": "t11",
+"data": {
+"text": "Sacar turno de acreditación del 8/12 (se habilita en la web unos días antes)",
+"who": "both",
+"done": false,
+"order": 0
+}
+},
+{
+"col": "days",
+"id": "d08",
+"data": {
+"detail": "Acreditación con turno en la Base del Cerro Catedral, en el predio de la organización. El turno se saca en la web unos días antes. Entrega del bolso de corredor (el día antes de largar)."
 }
 }
 ]
