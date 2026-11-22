@@ -148,6 +148,17 @@ function renderInfo() {
     $('bib-country').textContent = bib.country || '';
     $('bib-flag').className = 'flag ' + (bib.flag || '');
   }
+  const links = info.filter((x) => x.type === 'link');
+  $('links-card').hidden = !links.length;
+  const ICON = {
+    doc: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+    map: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/>',
+    link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
+  };
+  $('links').innerHTML = links.map((l) => `<a class="ulink" href="${esc(l.url)}" target="_blank" rel="noopener">
+      <span class="ico"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON[l.icon] || ICON.link}</svg></span>
+      <span class="txt"><span class="name">${esc(l.title)}</span>${l.sub ? `<span class="note">${esc(l.sub)}</span>` : ''}</span>
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>`).join('');
   const flights = info.filter((x) => x.type === 'flight');
   const stays = info.filter((x) => x.type === 'stay');
   $('flights-wrap').hidden = !flights.length;

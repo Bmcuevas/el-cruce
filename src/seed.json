@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 4,
+"version": 5,
 "patches": [
 {
 "v": 2,
@@ -1466,6 +1466,35 @@
 "number": "E8310",
 "country": "Italia",
 "flag": "it"
+}
+}
+]
+},
+{
+"v": 5,
+"ops": [
+{
+"col": "info",
+"id": "link-checklist",
+"data": {
+"type": "link",
+"order": 1,
+"title": "Checklist oficial del bolso",
+"sub": "PDF de la organización",
+"url": "https://elcruce.com.ar/wp-content/uploads/2026/10/checklist-bolso-el-cruce-2026.pdf",
+"icon": "doc"
+}
+},
+{
+"col": "info",
+"id": "link-recorridos",
+"data": {
+"type": "link",
+"order": 2,
+"title": "Recorrido de la carrera",
+"sub": "Etapas, altimetría y mapas · elcruce.com.ar",
+"url": "https://elcruce.com.ar/recorridos/",
+"icon": "map"
 }
 }
 ]
