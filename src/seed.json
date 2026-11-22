@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 12,
+"version": 13,
 "patches": [
 {
 "v": 2,
@@ -1696,6 +1696,18 @@
 "id": "t01",
 "data": {
 "text": "Reservar hotel en Neuquén para la noche del 7 al 8"
+}
+}
+]
+},
+{
+"v": 13,
+"ops": [
+{
+"col": "days",
+"id": "d07",
+"data": {
+"extra": "Cena con el Chino en Neuquén."
 }
 }
 ]
