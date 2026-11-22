@@ -161,8 +161,8 @@ function renderInfo() {
       <span class="ico"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON[l.icon] || ICON.link}</svg></span>
       <span class="txt"><span class="name">${esc(l.title)}</span>${l.sub ? `<span class="note">${esc(l.sub)}</span>` : ''}</span>
       <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg></a>`).join('');
-  const flights = info.filter((x) => x.type === 'flight').sort((a, b) => (a.who === state.who ? 0 : 1) - (b.who === state.who ? 0 : 1) || (a.order || 0) - (b.order || 0));
-  const stays = info.filter((x) => x.type === 'stay');
+  const flights = info.filter((x) => x.type === 'flight' && (!x.who || x.who === state.who)).sort((a, b) => (a.who === state.who ? 0 : 1) - (b.who === state.who ? 0 : 1) || (a.order || 0) - (b.order || 0));
+  const stays = info.filter((x) => x.type === 'stay' && !x.hidden);
   $('flights-wrap').hidden = !flights.length;
   $('stays-wrap').hidden = !stays.length;
   $('flights').innerHTML = flights.map((f) => {

@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 14,
+"version": 15,
 "patches": [
 {
 "v": 2,
@@ -1732,6 +1732,18 @@
 "pending": true,
 "booking": "https://www.booking.com/hotel/ar/terredo.es.html?checkin=2026-12-07&checkout=2026-12-08&group_adults=2&no_rooms=1&group_children=0",
 "maps": "https://www.google.com/maps/search/?api=1&query=Hotel+Apolo+Av.+Olascoaga+361+Neuqu%C3%A9n"
+}
+}
+]
+},
+{
+"v": 15,
+"ops": [
+{
+"col": "info",
+"id": "stay-neuquen",
+"data": {
+"hidden": true
 }
 }
 ]
