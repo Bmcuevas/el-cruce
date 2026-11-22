@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 13,
+"version": 14,
 "patches": [
 {
 "v": 2,
@@ -1708,6 +1708,30 @@
 "id": "d07",
 "data": {
 "extra": "Cena con el Chino en Neuquén."
+}
+}
+]
+},
+{
+"v": 14,
+"ops": [
+{
+"col": "info",
+"id": "stay-neuquen",
+"data": {
+"type": "stay",
+"order": 0,
+"name": "Hotel Apolo",
+"alias": "Opción para la noche del 7 · todavía sin reservar",
+"address": "Av. Coronel Olascoaga 361, Neuquén (a 450 m del centro)",
+"phone": "+54 299 442-2334",
+"nights": [
+"Lun 7 dic"
+],
+"price": "83 € en Booking · 2 camas, desayuno, cancelación gratis, pago en el hotel",
+"pending": true,
+"booking": "https://www.booking.com/hotel/ar/terredo.es.html?checkin=2026-12-07&checkout=2026-12-08&group_adults=2&no_rooms=1&group_children=0",
+"maps": "https://www.google.com/maps/search/?api=1&query=Hotel+Apolo+Av.+Olascoaga+361+Neuqu%C3%A9n"
 }
 }
 ]
