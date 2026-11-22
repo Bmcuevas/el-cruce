@@ -95,7 +95,8 @@ function itemRow(it, who, readonly) {
   const s = statusOf(it, who);
   const note = it.note ? `<span class="note">${esc(it.note)}</span>` : '';
   const tag = it.shared ? `<span class="tag">Compartido · lo lleva ${esc(PEOPLE[it.owner] || '')}</span>` : '';
-  return `<button type="button" class="item" data-item="${esc(it.id)}"${readonly || s === 'kit' ? ' disabled' : ''} aria-label="${esc(it.name)}: ${LABEL[s]}"><span class="txt">${tag}<span class="name">${esc(it.name)}</span>${note}</span><span class="badge ${s}">${LABEL[s]}</span></button>`;
+  const buy = it.buy && !isDone(s) ? `<span class="buy">Comprar en ${esc(it.buy)}</span>` : '';
+  return `<button type="button" class="item" data-item="${esc(it.id)}"${readonly || s === 'kit' ? ' disabled' : ''} aria-label="${esc(it.name)}: ${LABEL[s]}"><span class="txt">${tag}<span class="name">${esc(it.name)}</span>${buy}${note}</span><span class="badge ${s}">${LABEL[s]}</span></button>`;
 }
 
 function renderEquipaje() {
@@ -285,6 +286,37 @@ document.addEventListener('click', (ev) => {
   }
 });
 
+// ---------- documento (PDF cifrado con el código del viaje: el repo es público)
+async function loadDocMeta() {
+  try {
+    const r = await fetch('docs/lista.json', { cache: 'no-cache' });
+    if (!r.ok) return;
+    const m = await r.json();
+    $('doc-card').hidden = false;
+    $('doc-updated').textContent = 'Versión del ' + m.updated + (m.pages ? ' · ' + m.pages + ' páginas' : '');
+  } catch (e) { /* sin señal y sin copia: la tarjeta queda oculta */ }
+}
+$('doc-dl').addEventListener('click', async () => {
+  if (!trip) return;
+  const btn = $('doc-dl'); btn.disabled = true; const prev = btn.textContent; btn.textContent = 'Preparando…';
+  try {
+    const r = await fetch('docs/lista.enc', { cache: 'no-cache' });
+    if (!r.ok) throw new Error('http ' + r.status);
+    const buf = new Uint8Array(await r.arrayBuffer());
+    const salt = buf.slice(0, 16); const iv = buf.slice(16, 28); const data = buf.slice(28);
+    const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(trip), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 150000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+    const pdf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+    const url = URL.createObjectURL(new Blob([pdf], { type: 'application/pdf' }));
+    const a = document.createElement('a'); a.href = url; a.download = 'El Cruce 2026 - Lista de equipaje.pdf';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  } catch (e) {
+    console.error(e);
+    toast(navigator.onLine ? 'No se pudo abrir el documento.' : 'Sin señal: el documento se descarga con conexión.');
+  } finally { btn.disabled = false; btn.textContent = prev; }
+});
+
 $('et-reset').addEventListener('click', () => {
   if (!fs) return;
   const e = state.etapa[state.who] || { stage: 1, done: {} };
@@ -305,7 +337,8 @@ $('add-form').addEventListener('submit', (ev) => {
 // ---------- data
 function listen(name, key) {
   onSnapshot(col(name), (snap) => {
-    const arr = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+    let arr = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+    if (key === 'items' || key === 'todos') arr = arr.filter((o) => !o.removed);
     if (key === 'etapa') { const m = {}; arr.forEach((o) => { m[o.id] = o; }); state.etapa = m; renderEtapa(); return; }
     if (key === 'info') { state.info = arr; renderInfo(); return; }
     state[key] = arr; state.loaded[key] = true;
@@ -354,6 +387,7 @@ function start(code) {
   trip = code;
   const app = initializeApp(window.FIREBASE_CONFIG);
   fs = initializeFirestore(app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) });
+  loadDocMeta();
   listen('items', 'items'); listen('todos', 'todos'); listen('days', 'days'); listen('etapa', 'etapa'); listen('info', 'info');
   syncSeed();
 }

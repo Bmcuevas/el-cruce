@@ -1844,6 +1844,549 @@
      }
     }
    ]
+  },
+  {
+   "v": 19,
+   "ops": [
+    {
+     "col": "items",
+     "id": "bolsa-para-residuos-ziploc",
+     "data": {
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "certificado-medico",
+     "data": {
+      "s": {
+       "bruno": "verificar"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "botiquin-chico",
+     "data": {
+      "removed": true
+     }
+    },
+    {
+     "col": "items",
+     "id": "bolsita-estanca-1l",
+     "data": {
+      "bag": "carrera",
+      "name": "Bolsita estanca 1 L (botiquín chico)",
+      "note": "El botiquín chico se arma con porciones del grande. Alternativa: Ziploc chica doble",
+      "buy": "Decathlon",
+      "order": 27,
+      "shared": false,
+      "owner": "",
+      "s": {
+       "bruno": "falta",
+       "marco": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "protector-solar-chico",
+     "data": {
+      "buy": "Campana",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "manteca-de-cacao",
+     "data": {
+      "name": "Manteca de cacao / protector labial",
+      "note": "Con SPF 30 o más",
+      "buy": "Campana",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "crema-para-paspaduras",
+     "data": {
+      "buy": "Campana",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "celular-bolsita-estanca",
+     "data": {
+      "buy": "Decathlon",
+      "note": "",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "efectivo-foto-del-documento",
+     "data": {
+      "name": "Efectivo + copia del documento",
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "papel-higienico-toallitas",
+     "data": {
+      "name": "Papel higiénico + toallitas húmedas",
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "geles-barras-y-gomitas",
+     "data": {
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "electrolitos",
+     "data": {
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "medias-de-trail-x4",
+     "data": {
+      "buy": "Decathlon",
+      "note": "Probar las de dedos separados (tipo Injinji Trail): evitan ampollas entre dedos. 1 por etapa + 1 de repuesto en la mochila",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "ropa-interior-tecnica",
+     "data": {
+      "name": "Ropa interior técnica x3",
+      "buy": "Decathlon",
+      "note": "",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "polainas-cortas",
+     "data": {
+      "buy": "Decathlon",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "cinta-kinesio-tape",
+     "data": {
+      "removed": true
+     }
+    },
+    {
+     "col": "items",
+     "id": "vendas-cinta-para-dedos",
+     "data": {
+      "name": "Tape rígido (dedos y ampollas) + venda elástica",
+      "note": "Ej. Leukotape, Leukoplast, Hansaplast",
+      "buy": "Campana",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "nutricion-etapas-2-y-3",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "zapatillas-de-trail",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "zapatillas-de-running-viejas-2-par",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "aislante",
+     "data": {
+      "note": "Conseguir en Campana. Se lo pedimos a Valentín: falta volver a preguntarle si lo consiguió",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "campera-de-pluma-o-sintetica",
+     "data": {
+      "buy": "Decathlon",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "pantalon-de-abrigo",
+     "data": {
+      "buy": "Decathlon",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "higiene-cepillo-pasta-desodorante",
+     "data": {
+      "name": "Higiene: cepillo, pasta, desodorante, toallitas, papel",
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "jabon-y-shampoo-seco",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "soga-y-broches-para-colgar-la-ropa",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "power-bank-grande-cables",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "mate-termo-y-yerba",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "chocolates-alfajores-y-snacks",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "lentes-de-contacto",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "recuperador-post-etapa-x3",
+     "data": {
+      "buy": "Decathlon",
+      "note": "3 sobres individuales. Probar uno antes en un entrenamiento",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "pilas-y-bolsas-para-ropa-sucia",
+     "data": {
+      "name": "Bolsas para ropa sucia",
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "bolsas-estancas-y-ziploc-para-la-comida",
+     "data": {
+      "removed": true
+     }
+    },
+    {
+     "col": "items",
+     "id": "jarro-termico",
+     "data": {
+      "removed": true
+     }
+    },
+    {
+     "col": "items",
+     "id": "guitarra",
+     "data": {
+      "note": "Para el campamento",
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "gasas-cinta-hipoalergenica-curitas",
+     "data": {
+      "owner": "bruno",
+      "buy": "Campana",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "aguja-y-alcohol",
+     "data": {
+      "owner": "bruno",
+      "buy": "Campana",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "analgesicos-y-antiinflamatorios",
+     "data": {
+      "owner": "bruno",
+      "buy": "Campana",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "antidiarreico",
+     "data": {
+      "owner": "bruno",
+      "buy": "Campana",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "buscapina",
+     "data": {
+      "owner": "bruno",
+      "buy": "Campana",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "gotas-para-ojos",
+     "data": {
+      "owner": "bruno",
+      "buy": "Campana",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "parches-tipo-compeed-moleskin",
+     "data": {
+      "owner": "bruno",
+      "buy": "Italia (Compeed) y Campana (moleskin)",
+      "note": "Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "victorinox-pinza",
+     "data": {
+      "owner": "bruno",
+      "note": "La buscamos en Campana (no viaja desde Milán). Lo arma Bruno; se divide el gasto",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "vaselina-extra",
+     "data": {
+      "removed": true
+     }
+    },
+    {
+     "col": "items",
+     "id": "protector-solar-grande-y-repelente",
+     "data": {
+      "name": "Repelente",
+      "owner": "bruno",
+      "buy": "Campana",
+      "s": {
+       "bruno": "falta"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "muda-limpia-zapatillas-urbanas",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "toalla-ducha-y-ojotas",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "cargador-y-ropa-del-viaje-de-vuelta",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "dni-pasaporte",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "seguro-de-viaje-con-cobertura-de-montana",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "pasajes-alojamiento-inscripcion",
+     "data": {
+      "s": {
+       "bruno": "tengo"
+      }
+     }
+    },
+    {
+     "col": "items",
+     "id": "certificado-medico-impreso-digital",
+     "data": {
+      "s": {
+       "bruno": "verificar"
+      }
+     }
+    },
+    {
+     "col": "todos",
+     "id": "t12",
+     "data": {
+      "text": "Pedirles a mis hermanos que pasen por el seguro del auto: documentación para circular y comprobante del último pago",
+      "who": "bruno",
+      "done": false,
+      "order": 2
+     }
+    },
+    {
+     "col": "todos",
+     "id": "t13",
+     "data": {
+      "text": "Llevar el poder del auto",
+      "who": "bruno",
+      "done": false,
+      "order": 3
+     }
+    }
+   ]
   }
  ]
 }

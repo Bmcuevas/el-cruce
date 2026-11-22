@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<link rel="stylesheet" href="styles.css?v=cf0fa7fb">
+<link rel="stylesheet" href="styles.css?v=d90a3481">
 </head>
 <body>
 
@@ -56,6 +56,13 @@
       <div class="card">
         <div class="row-between"><h2>Para resolver</h2><span class="muted" id="todo-count"></span></div>
         <div id="todos"><p class="muted">Cargando…</p></div>
+      </div>
+      <div class="card doc-card" id="doc-card" hidden>
+        <div class="doc-row">
+          <span class="ico"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6M9 14l3 3 3-3"/></svg></span>
+          <span class="txt"><span class="name">Lista completa (documento)</span><span class="note" id="doc-updated"></span></span>
+        </div>
+        <button type="button" class="btn" id="doc-dl">Descargar PDF</button>
       </div>
       <div class="card" id="links-card" hidden>
         <h2>Links útiles</h2>
@@ -147,6 +154,6 @@
 </div>
 
 <script src="firebase-config.js"></script>
-<script type="module" src="app.js?v=cf0fa7fb"></script>
+<script type="module" src="app.js?v=d90a3481"></script>
 </body>
 </html>
