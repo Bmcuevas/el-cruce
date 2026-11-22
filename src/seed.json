@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 8,
+"version": 9,
 "patches": [
 {
 "v": 2,
@@ -1562,6 +1562,66 @@
 "km": 32,
 "dplus": 1600,
 "route": "Campamento 2 → Cerro Catedral"
+}
+}
+]
+},
+{
+"v": 9,
+"ops": [
+{
+"col": "info",
+"id": "flight-marco-ida",
+"data": {
+"type": "flight",
+"who": "marco",
+"order": 3,
+"title": "Ida",
+"date": "Sáb 5 dic 2026",
+"bag": "Valija despachada: a confirmar",
+"hand": "Equipaje de mano",
+"segments": [
+{
+"code": "ITA Airways",
+"airline": "1 escala",
+"from": "LIN",
+"fromName": "Milán Linate",
+"dep": "16:00",
+"to": "EZE",
+"toName": "Ezeiza",
+"arr": "08:50",
+"plus": "+1",
+"dur": "20 h 50"
+}
+]
+}
+},
+{
+"col": "info",
+"id": "flight-marco-vuelta",
+"data": {
+"type": "flight",
+"who": "marco",
+"order": 4,
+"title": "Vuelta",
+"date": "Dom 20 dic 2026",
+"bag": "Valija despachada: a confirmar",
+"hand": "Equipaje de mano",
+"warn": "Lleva los bastones de Bruno: confirmar que tenga valija despachada",
+"segments": [
+{
+"code": "ITA Airways",
+"airline": "1 escala",
+"from": "EZE",
+"fromName": "Ezeiza",
+"dep": "22:20",
+"to": "LIN",
+"toName": "Milán Linate",
+"arr": "18:10",
+"plus": "+1",
+"dur": "15 h 50"
+}
+]
 }
 }
 ]
