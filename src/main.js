@@ -220,7 +220,7 @@ function stageStats(d) {
   if (!d || !d.km) return '';
   const limit = Math.round(d.km * 15);
   const lim = `${Math.floor(limit / 60)} h${limit % 60 ? ' ' + (limit % 60) : ''}`;
-  return `<div class="stats"><span><b>${fmtN(d.km)}</b> km</span><span><b>+${fmtN(d.dplus)}</b> m</span>${d.high ? `<span>techo <b>${fmtN(d.high)}</b> m</span>` : ''}<span>límite ~<b>${lim}</b></span></div>`;
+  return `<div class="stats"><span><b>${fmtN(d.km)}</b> km</span><span><b>+${fmtN(d.dplus)}</b> m</span>${d.high ? `<span>techo <b>${fmtN(d.high)}</b> m</span>` : ''}<span>límite ~<b>${lim}</b></span>${d.oasis ? `<span>oasis <b>${esc(d.oasis)}</b></span>` : ''}</div>`;
 }
 function renderViaje() {
   renderInfo();

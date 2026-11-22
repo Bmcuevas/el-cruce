@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 10,
+"version": 11,
 "patches": [
 {
 "v": 2,
@@ -1869,6 +1869,35 @@
 }
 ]
 }
+}
+}
+]
+},
+{
+"v": 11,
+"ops": [
+{
+"col": "days",
+"id": "d09",
+"data": {
+"profileImg": "img/altimetria-etapa-1.jpg",
+"oasis": "km 12 y 25"
+}
+},
+{
+"col": "days",
+"id": "d10",
+"data": {
+"profileImg": "img/altimetria-etapa-2.jpg",
+"oasis": "km 8,5"
+}
+},
+{
+"col": "days",
+"id": "d11",
+"data": {
+"profileImg": "img/altimetria-etapa-3.jpg",
+"oasis": "km 13 y 25,5"
 }
 }
 ]
