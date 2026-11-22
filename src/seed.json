@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 11,
+"version": 12,
 "patches": [
 {
 "v": 2,
@@ -1651,6 +1651,51 @@
 "data": {
 "profileImg": "img/altimetria-etapa-3.jpg",
 "oasis": "km 13 y 25,5"
+}
+}
+]
+},
+{
+"v": 12,
+"ops": [
+{
+"col": "days",
+"id": "d07",
+"data": {
+"title": "Ruta Campana → Neuquén",
+"detail": "Salida 5:00 · llegada estimada 18:30–19:30. ~1.150–1.200 km, 12–14 h con paradas.",
+"night": "Neuquén (a reservar)",
+"kind": "open",
+"moreTitle": "Ruta y detalles del viaje",
+"more": [
+"Campana → Ruta 6 hasta Luján → Ruta 5 hacia Santa Rosa (La Pampa) → Alto Valle → Neuquén. Así no entran a Buenos Aires.",
+"Alternativa por Ruta 3 / Bahía Blanca / Ruta 22: más camiones.",
+"Turnarse al volante y parar cada 2–3 h. Cargar nafta cada vez que se pueda.",
+"En La Pampa hay tramos en mal estado y poca señal: llevar el mapa descargado.",
+"Plan B si se hace tarde: dormir en General Roca (~50 km antes)."
+],
+"mapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Campana,+Buenos+Aires&destination=Neuqu%C3%A9n&travelmode=driving"
+}
+},
+{
+"col": "days",
+"id": "d08",
+"data": {
+"title": "Neuquén → Bariloche",
+"moreTitle": "Ruta y horarios",
+"more": [
+"Salida 7:00 por Ruta 237 (~430 km, 5–6 h) · llegada estimada 12:00–13:00.",
+"Al sur de Piedra del Águila hay un tramo deteriorado (puente del Collón Curá → río Limay Chico): ir con calma.",
+"A la tarde: acreditación con turno en la Base del Cerro Catedral y entrega del bolso de corredor."
+],
+"mapsUrl": "https://www.google.com/maps/dir/?api=1&origin=Neuqu%C3%A9n&destination=San+Carlos+de+Bariloche&travelmode=driving"
+}
+},
+{
+"col": "todos",
+"id": "t01",
+"data": {
+"text": "Reservar hotel en Neuquén para la noche del 7 al 8"
 }
 }
 ]

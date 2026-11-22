@@ -229,3 +229,12 @@ nav.tabs a[aria-current="page"] { color: var(--lake); font-weight: 600; }
 .night .prof .ph { fill: #FB923C; }
 .night .prof .ps { fill: #F3F1EC; }
 .prof img { width: 100%; height: auto; display: block; border-radius: 10px; }
+
+/* --- detalles desplegables del día --- */
+.day details.more { border-top: 1px solid var(--line); padding-top: 8px; }
+.day details.more summary { cursor: pointer; font-size: 14px; font-weight: 600; color: var(--lake); min-height: 36px; display: flex; align-items: center; list-style: none; }
+.day details.more summary::-webkit-details-marker { display: none; }
+.day details.more summary::after { content: "▾"; margin-left: 6px; font-size: 12px; transition: transform .15s; }
+.day details.more[open] summary::after { transform: rotate(180deg); }
+.day details.more ul { margin: 4px 0 10px; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.day details.more .maps { display: inline-flex; align-items: center; text-decoration: none; font-size: 13px; }
