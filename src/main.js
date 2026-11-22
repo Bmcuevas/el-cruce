@@ -140,6 +140,14 @@ function renderEtapa() {
 
 function renderInfo() {
   const info = state.info.slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+  const bib = info.find((x) => x.type === 'bib' && x.who === state.who);
+  $('bib').hidden = !bib;
+  if (bib) {
+    $('bib-name').textContent = bib.name || PEOPLE[state.who].toUpperCase();
+    $('bib-num').textContent = bib.number || '';
+    $('bib-country').textContent = bib.country || '';
+    $('bib-flag').className = 'flag ' + (bib.flag || '');
+  }
   const flights = info.filter((x) => x.type === 'flight');
   const stays = info.filter((x) => x.type === 'stay');
   $('flights-wrap').hidden = !flights.length;
@@ -182,7 +190,7 @@ function renderViaje() {
   }).join('') : '<p class="state">Todavía no hay días cargados.</p>';
 }
 
-function renderAll() { renderWho(); renderHome(); renderTodos(); renderEquipaje(); renderEtapa(); renderViaje(); }
+function renderAll() { renderInfo(); renderWho(); renderHome(); renderTodos(); renderEquipaje(); renderEtapa(); renderViaje(); }
 
 // ---------- routing
 function route() {

@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 3,
+"version": 4,
 "patches": [
 {
 "v": 2,
@@ -1449,6 +1449,23 @@
 "bruno": "falta",
 "marco": "falta"
 }
+}
+}
+]
+},
+{
+"v": 4,
+"ops": [
+{
+"col": "info",
+"id": "bib-bruno",
+"data": {
+"type": "bib",
+"who": "bruno",
+"name": "BRUNO",
+"number": "E8310",
+"country": "Italia",
+"flag": "it"
 }
 }
 ]
