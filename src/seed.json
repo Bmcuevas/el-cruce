@@ -1803,6 +1803,47 @@
      }
     }
    ]
+  },
+  {
+   "v": 18,
+   "ops": [
+    {
+     "col": "days",
+     "id": "d07",
+     "data": {
+      "more": [
+       "Campana → Ruta 6 hasta Luján → Ruta 5 hacia Santa Rosa (La Pampa) → Alto Valle → Neuquén. Así no entran a Buenos Aires.",
+       "Nafta: el auto hace ~400 km por tanque. Cargar en Trenque Lauquen, General Acha, Colonia 25 de Mayo y Neuquén. Campana → Trenque Lauquen son ~440 km: hacer una carga intermedia (9 de Julio o Pehuajó).",
+       "Ruta 152 (Conquista del Desierto), entre General Acha y 25 de Mayo: ~250 km sin nada. Salir de General Acha con el tanque lleno.",
+       "La rueda de auxilio es temporal: no permite ir a velocidad normal.",
+       "Turnarse al volante y parar cada 2–3 h. En La Pampa hay tramos en mal estado y poca señal: llevar el mapa descargado.",
+       "Plan B si se hace tarde: dormir en General Roca (~50 km antes)."
+      ]
+     }
+    },
+    {
+     "col": "days",
+     "id": "d08",
+     "data": {
+      "more": [
+       "Salida 7:00 por Ruta 237 (~430 km, 5–6 h) · llegada estimada 12:00–13:00.",
+       "Última carga de nafta en Piedra del Águila.",
+       "Al sur de Piedra del Águila hay un tramo deteriorado (puente del Collón Curá → río Limay Chico): ir con calma.",
+       "A la tarde: acreditación con turno en la Base del Cerro Catedral y entrega del bolso de corredor."
+      ]
+     }
+    },
+    {
+     "col": "todos",
+     "id": "t12",
+     "data": {
+      "text": "Pasar por el seguro del auto: documentación para circular + comprobante del último pago. Llevar el poder.",
+      "done": false,
+      "order": 2,
+      "who": "bruno"
+     }
+    }
+   ]
   }
  ]
 }
