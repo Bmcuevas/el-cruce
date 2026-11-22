@@ -205,3 +205,26 @@ nav.tabs a[aria-current="page"] { color: var(--lake); font-weight: 600; }
 .et-route { font-size: 14px; color: #C9D6DA; }
 .night .stats span { background: #1F2C31; color: #93A6AD; }
 .night .stats b { color: #F3F1EC; }
+
+/* --- perfil de etapa --- */
+.prof { margin: 4px 0 0; }
+.prof svg { width: 100%; height: auto; display: block; overflow: visible; }
+.prof figcaption { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.prof .pg { stroke: var(--line); stroke-width: 1; }
+.prof .pt { font-size: 9px; fill: var(--muted); font-family: var(--text); }
+.prof .pa { fill: var(--kit-bg); }
+.prof .pl { fill: none; stroke: var(--lake); stroke-width: 2.2; stroke-linejoin: round; }
+.prof .po { stroke: var(--forest); stroke-width: 1; stroke-dasharray: 3 3; }
+.prof .pot { font-size: 9px; font-weight: 600; fill: var(--forest); font-family: var(--text); }
+.prof .pd { fill: var(--alert); }
+.prof .ph { font-size: 10px; font-weight: 700; fill: var(--alert); font-family: var(--text); }
+.prof .ps { font-size: 9px; font-weight: 700; fill: var(--ink); font-family: var(--text); }
+.night .prof .pg { stroke: #24343A; }
+.night .prof .pt, .night .prof figcaption { fill: #93A6AD; color: #93A6AD; }
+.night .prof .pa { fill: #17303D; }
+.night .prof .pl { stroke: #9FC3D4; }
+.night .prof .po { stroke: #7CC4A0; }
+.night .prof .pot { fill: #7CC4A0; }
+.night .prof .pd { fill: #FB923C; }
+.night .prof .ph { fill: #FB923C; }
+.night .prof .ps { fill: #F3F1EC; }

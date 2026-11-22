@@ -123,7 +123,7 @@ function renderEtapa() {
   const doneMap = (e.done && e.done['s' + stage]) || {};
   $('et-title').textContent = 'Etapa ' + stage + ' · ' + STAGE_DAY[stage];
   const sd = state.days.find((x) => x.id === 'd' + String(8 + stage).padStart(2, '0'));
-  $('et-stats').innerHTML = sd ? `${sd.route ? `<div class="et-route">${esc(sd.route)}</div>` : ''}${stageStats(sd)}` : '';
+  $('et-stats').innerHTML = sd ? `${sd.route ? `<div class="et-route">${esc(sd.route)}</div>` : ''}${stageStats(sd)}${profileSvg(sd.profile)}` : '';
   document.querySelectorAll('[data-stage]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.stage) === stage)));
   let total = 0; let done = 0; let html = '';
   ETAPA.forEach((g) => {
@@ -189,6 +189,31 @@ function renderInfo() {
 }
 
 const fmtN = (n) => Number(n).toLocaleString('es-AR');
+function profileSvg(pr) {
+  if (!pr || !pr.pts || pr.pts.length < 2) return '';
+  const W = 340, H = 150, L = 34, R = 8, T = 22, B = 22;
+  const kms = pr.pts.map((p) => p[0]); const alts = pr.pts.map((p) => p[1]);
+  const kMax = Math.max(...kms);
+  const lo = Math.floor((Math.min(...alts) - 60) / 100) * 100;
+  const hi = Math.ceil((Math.max(...alts) + 60) / 100) * 100;
+  const x = (k) => L + (k / kMax) * (W - L - R);
+  const y = (a) => T + (1 - (a - lo) / (hi - lo)) * (H - T - B);
+  const line = pr.pts.map((p, i) => `${i ? 'L' : 'M'}${x(p[0]).toFixed(1)},${y(p[1]).toFixed(1)}`).join(' ');
+  const area = `${line} L${x(kMax).toFixed(1)},${H - B} L${x(0).toFixed(1)},${H - B} Z`;
+  const top = pr.pts.reduce((m, p) => (p[1] > m[1] ? p : m), pr.pts[0]);
+  const grid = [lo, Math.round((lo + hi) / 200) * 100, hi].map((a) => `<line x1="${L}" x2="${W - R}" y1="${y(a)}" y2="${y(a)}" class="pg"/><text x="${L - 4}" y="${y(a) + 3}" text-anchor="end" class="pt">${fmtN(a)}</text>`).join('');
+  const oasis = (pr.oasis || []).map((k) => `<line x1="${x(k)}" x2="${x(k)}" y1="${T - 6}" y2="${H - B}" class="po"/><text x="${x(k)}" y="${T - 10}" text-anchor="middle" class="pot">Oasis</text>`).join('');
+  const steep = (pr.tramos || []).filter((t) => Math.abs(t.pct) >= 6).map((t) => {
+    const mid = (t.a + t.b) / 2; const a = (pr.pts.find((p) => p[0] === t.a) || [0, lo])[1]; const b = (pr.pts.find((p) => p[0] === t.b) || [0, lo])[1];
+    return `<text x="${x(mid) + (t.pct > 0 ? -18 : 14)}" y="${Math.min(y((a + b) / 2) - 8, H - B - 4)}" text-anchor="middle" class="ps">${t.pct > 0 ? '+' : ''}${String(t.pct).replace('.', ',')}%</text>`;
+  }).join('');
+  const kt = [0, Math.round(kMax / 2), kMax].map((k) => `<text x="${x(k)}" y="${H - 6}" text-anchor="middle" class="pt">${k} km</text>`).join('');
+  return `<figure class="prof"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Perfil aproximado: punto más alto ${fmtN(top[1])} m en el km ${String(top[0]).replace('.', ',')}">
+    ${grid}<path d="${area}" class="pa"/><path d="${line}" class="pl"/>${oasis}
+    <circle cx="${x(top[0])}" cy="${y(top[1])}" r="3.5" class="pd"/><text x="${Math.min(x(top[0]), W - R - 30)}" y="${y(top[1]) - 8}" text-anchor="middle" class="ph">${fmtN(top[1])} m</text>
+    ${steep}${kt}</svg>
+    <figcaption>Perfil aproximado por tramos (Infotrail). El oficial está en Recorridos.</figcaption></figure>`;
+}
 function stageStats(d) {
   if (!d || !d.km) return '';
   const limit = Math.round(d.km * 15);
@@ -205,7 +230,7 @@ function renderViaje() {
   $('days').innerHTML = list.length ? list.map((d) => {
     const t = tags[d.kind] || tags.open;
     return `<div class="day"><div class="d"><div class="dow">${esc(d.dow)}</div><div class="num${d.race ? ' race' : ''}">${esc(d.num)}</div><div class="line"></div></div>`
-      + `<div class="card${d.kind === 'open' ? ' open' : ''}"><div style="font-weight:600;font-size:16px">${esc(d.title)}</div>${d.route ? `<div class="muted">${esc(d.route)}</div>` : ''}${stageStats(d)}${d.detail ? `<div class="muted">${esc(d.detail)}</div>` : ''}${d.extra ? `<div class="extra"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/></svg><span>${esc(d.extra)}</span></div>` : ''}`
+      + `<div class="card${d.kind === 'open' ? ' open' : ''}"><div style="font-weight:600;font-size:16px">${esc(d.title)}</div>${d.route ? `<div class="muted">${esc(d.route)}</div>` : ''}${stageStats(d)}${profileSvg(d.profile)}${d.detail ? `<div class="muted">${esc(d.detail)}</div>` : ''}${d.extra ? `<div class="extra"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/></svg><span>${esc(d.extra)}</span></div>` : ''}`
       + `<div class="night-row"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8l9-5 9 5v10"/><path d="M3 18h18M9 18v-5h6v5"/></svg><span>${esc(d.night)}</span><span class="badge ${t[1]}">${t[0]}</span></div></div></div>`;
   }).join('') : '<p class="state">Todavía no hay días cargados.</p>';
 }
