@@ -194,3 +194,5 @@ nav.tabs a[aria-current="page"] { color: var(--lake); font-weight: 600; }
 .ulink .name { font-weight: 600; }
 .ulink .note { font-size: 12px; color: var(--muted); }
 .ulink > svg { color: var(--muted); flex-shrink: 0; }
+.day .extra { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; font-weight: 600; color: var(--ver-fg); background: var(--ver-bg); border-radius: 10px; padding: 8px 10px; }
+.day .extra svg { flex-shrink: 0; margin-top: 1px; }
