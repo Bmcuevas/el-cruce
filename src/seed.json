@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 15,
+"version": 16,
 "patches": [
 {
 "v": 2,
@@ -1744,6 +1744,48 @@
 "id": "stay-neuquen",
 "data": {
 "hidden": true
+}
+}
+]
+},
+{
+"v": 16,
+"ops": [
+{
+"col": "info",
+"id": "stay-neuquen",
+"data": {
+"type": "stay",
+"order": 0,
+"hidden": false,
+"pending": false,
+"booking": "",
+"name": "La Via Hostel",
+"alias": "Neuquén · reservado por Booking",
+"address": "Bahía Blanca 169, Neuquén",
+"phone": "",
+"nights": [
+"Lun 7 dic"
+],
+"price": "≈ 44 € · se paga en el hostel, solo efectivo",
+"note": "Habitación doble (1 cama doble), baño compartido, desayuno incluido. Check-in 13:00–00:00 · salida hasta las 10:00 (desde la 1:00).",
+"maps": "https://www.google.com/maps/search/?api=1&query=La+Via+Hostel+Bah%C3%ADa+Blanca+169+Neuqu%C3%A9n"
+}
+},
+{
+"col": "days",
+"id": "d07",
+"data": {
+"night": "La Via Hostel",
+"kind": "ok"
+}
+},
+{
+"col": "todos",
+"id": "t01",
+"data": {
+"done": true,
+"text": "Reservar hotel en Neuquén para la noche del 7 al 8"
 }
 }
 ]

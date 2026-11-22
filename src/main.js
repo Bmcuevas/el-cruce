@@ -184,7 +184,7 @@ function renderInfo() {
       <div class="row-between" style="align-items:flex-start"><div><div style="font-family:var(--display);font-size:19px;font-weight:700">${esc(h.name)}</div>${h.alias ? `<div class="muted">${esc(h.alias)}</div>` : ''}</div>
       ${h.maps ? `<a class="btn ghost" style="display:inline-flex;align-items:center;text-decoration:none;font-size:13px" href="${esc(h.maps)}" target="_blank" rel="noopener">Mapa</a>` : ''}</div>
       <div class="chips" style="flex-wrap:wrap">${(h.nights || []).map((n) => `<span class="badge ${h.pending ? 'falta' : 'tengo'}">${esc(n)}</span>`).join('')}${h.pending ? '<span class="badge verificar">Sin reservar</span>' : ''}${h.booking ? `<a class="badge kit" style="text-decoration:none" href="${esc(h.booking)}" target="_blank" rel="noopener">Ver en Booking</a>` : ''}</div>
-      <dl class="facts"><dt>Dirección</dt><dd>${esc(h.address)}</dd>${h.phone ? `<dt>Teléfono</dt><dd>${esc(h.phone)}</dd>` : ''}${h.price ? `<dt>Pagado</dt><dd>${esc(h.price)}</dd>` : ''}</dl>
+      <dl class="facts"><dt>Dirección</dt><dd>${esc(h.address)}</dd>${h.phone ? `<dt>Teléfono</dt><dd>${esc(h.phone)}</dd>` : ''}${h.note ? `<dt>Notas</dt><dd>${esc(h.note)}</dd>` : ''}${h.price ? `<dt>Pagado</dt><dd>${esc(h.price)}</dd>` : ''}</dl>
     </article>`).join('');
 }
 
