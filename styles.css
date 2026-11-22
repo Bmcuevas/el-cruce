@@ -196,3 +196,12 @@ nav.tabs a[aria-current="page"] { color: var(--lake); font-weight: 600; }
 .ulink > svg { color: var(--muted); flex-shrink: 0; }
 .day .extra { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; font-weight: 600; color: var(--ver-fg); background: var(--ver-bg); border-radius: 10px; padding: 8px 10px; }
 .day .extra svg { flex-shrink: 0; margin-top: 1px; }
+
+/* --- datos de etapa --- */
+.stats { display: flex; flex-wrap: wrap; gap: 6px; }
+.stats span { font-size: 12px; padding: 4px 9px; border-radius: 999px; background: var(--chip); color: var(--muted); font-variant-numeric: tabular-nums; }
+.stats b { color: var(--ink); font-weight: 700; }
+.et-stats { display: flex; flex-direction: column; gap: 8px; margin-top: -6px; }
+.et-route { font-size: 14px; color: #C9D6DA; }
+.night .stats span { background: #1F2C31; color: #93A6AD; }
+.night .stats b { color: #F3F1EC; }

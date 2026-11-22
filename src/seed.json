@@ -1167,7 +1167,7 @@
 "id": "d12"
 }
 ],
-"version": 7,
+"version": 8,
 "patches": [
 {
 "v": 2,
@@ -1529,6 +1529,39 @@
 "id": "d11",
 "data": {
 "extra": "Cumpleaños de Marco. A la noche, birra en Manush o en Blest."
+}
+}
+]
+},
+{
+"v": 8,
+"ops": [
+{
+"col": "days",
+"id": "d09",
+"data": {
+"km": 32,
+"dplus": 1200,
+"route": "Largada → Campamento 1"
+}
+},
+{
+"col": "days",
+"id": "d10",
+"data": {
+"km": 30,
+"dplus": 1600,
+"high": 1879,
+"route": "Campamento 1 → Campamento 2"
+}
+},
+{
+"col": "days",
+"id": "d11",
+"data": {
+"km": 32,
+"dplus": 1600,
+"route": "Campamento 2 → Cerro Catedral"
 }
 }
 ]
