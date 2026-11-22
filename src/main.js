@@ -123,7 +123,7 @@ function renderEtapa() {
   const doneMap = (e.done && e.done['s' + stage]) || {};
   $('et-title').textContent = 'Etapa ' + stage + ' · ' + STAGE_DAY[stage];
   const sd = state.days.find((x) => x.id === 'd' + String(8 + stage).padStart(2, '0'));
-  $('et-stats').innerHTML = sd ? `${sd.route ? `<div class="et-route">${esc(sd.route)}</div>` : ''}${stageStats(sd)}${profileSvg(sd.profile)}` : '';
+  $('et-stats').innerHTML = sd ? `${sd.route ? `<div class="et-route">${esc(sd.route)}</div>` : ''}${stageStats(sd)}${profileImg(sd)}` : '';
   document.querySelectorAll('[data-stage]').forEach((b) => b.setAttribute('aria-pressed', String(Number(b.dataset.stage) === stage)));
   let total = 0; let done = 0; let html = '';
   ETAPA.forEach((g) => {
@@ -189,6 +189,8 @@ function renderInfo() {
 }
 
 const fmtN = (n) => Number(n).toLocaleString('es-AR');
+// Official stage profile image, when one has been added to the day (field: profileImg).
+const profileImg = (d) => (d && d.profileImg ? `<figure class="prof"><img src="${esc(d.profileImg)}" alt="Perfil oficial de la ${esc(d.title)}" loading="lazy"></figure>` : '');
 function profileSvg(pr) {
   if (!pr || !pr.pts || pr.pts.length < 2) return '';
   const W = 340, H = 150, L = 34, R = 8, T = 22, B = 22;
@@ -230,7 +232,7 @@ function renderViaje() {
   $('days').innerHTML = list.length ? list.map((d) => {
     const t = tags[d.kind] || tags.open;
     return `<div class="day"><div class="d"><div class="dow">${esc(d.dow)}</div><div class="num${d.race ? ' race' : ''}">${esc(d.num)}</div><div class="line"></div></div>`
-      + `<div class="card${d.kind === 'open' ? ' open' : ''}"><div style="font-weight:600;font-size:16px">${esc(d.title)}</div>${d.route ? `<div class="muted">${esc(d.route)}</div>` : ''}${stageStats(d)}${profileSvg(d.profile)}${d.detail ? `<div class="muted">${esc(d.detail)}</div>` : ''}${d.extra ? `<div class="extra"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/></svg><span>${esc(d.extra)}</span></div>` : ''}`
+      + `<div class="card${d.kind === 'open' ? ' open' : ''}"><div style="font-weight:600;font-size:16px">${esc(d.title)}</div>${d.route ? `<div class="muted">${esc(d.route)}</div>` : ''}${stageStats(d)}${profileImg(d)}${d.detail ? `<div class="muted">${esc(d.detail)}</div>` : ''}${d.extra ? `<div class="extra"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21h16M5 21v-7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v7M12 12V8M12 5.5c.8-.8.8-1.7 0-2.5-.8.8-.8 1.7 0 2.5z"/></svg><span>${esc(d.extra)}</span></div>` : ''}`
       + `<div class="night-row"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18V8l9-5 9 5v10"/><path d="M3 18h18M9 18v-5h6v5"/></svg><span>${esc(d.night)}</span><span class="badge ${t[1]}">${t[0]}</span></div></div></div>`;
   }).join('') : '<p class="state">Todavía no hay días cargados.</p>';
 }

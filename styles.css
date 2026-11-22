@@ -228,3 +228,4 @@ nav.tabs a[aria-current="page"] { color: var(--lake); font-weight: 600; }
 .night .prof .pd { fill: #FB923C; }
 .night .prof .ph { fill: #FB923C; }
 .night .prof .ps { fill: #F3F1EC; }
+.prof img { width: 100%; height: auto; display: block; border-radius: 10px; }
